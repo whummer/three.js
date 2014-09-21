@@ -16,7 +16,6 @@
 		"**/.*",
 		"*.md",
 		"docs",
-		"editor",
 		"examples",
 		"src",
 		"test",
