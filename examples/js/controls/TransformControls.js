@@ -952,7 +952,12 @@
 
 		}
 
-		function onPointerUp( event ) {
+		/* whummer: allow access to onPointerUp from the outside */
+		function onPointerUp(event) {
+			scope.onPointerUp(event);
+		}
+		/* whummer: allow access to onPointerUp from the outside */
+		this.onPointerUp = function( event ) {
 
 			_dragging = false;
 			onPointerHover( event );
