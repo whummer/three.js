@@ -39,6 +39,8 @@ var Viewport = function ( editor ) {
 	sceneHelpers.add( selectionBox );
 
 	var transformControls = new THREE.TransformControls( camera, container.dom );
+	/* whummer: allow access to transformControls from the outside */
+	container.transformControls = transformControls;
 	transformControls.addEventListener( 'change', function () {
 
 		controls.enabled = true;
