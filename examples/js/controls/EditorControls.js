@@ -31,10 +31,14 @@ THREE.EditorControls = function ( object, domElement ) {
 
 	var center = this.center;
 	var normalMatrix = new THREE.Matrix3();
-	var pointer = new THREE.Vector2();
+	/* whummer: allow access to pointer from the outside
+		(all occurrences of "pointer" replaced with 
+		"this.pointer" in this file)
+	*/
+	this.pointer = new THREE.Vector2();
 	/* whummer: allow access to pointerOld from the outside
-		(all occurrences of "state" replaced with 
-		"this.state" in this file)
+		(all occurrences of "pointerOld" replaced with 
+		"this.pointerOld" in this file)
 	*/
 	this.pointerOld = new THREE.Vector2();
 
@@ -162,10 +166,10 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		event.preventDefault();
 
-		pointer.set( event.clientX, event.clientY );
+		this.pointer.set( event.clientX, event.clientY );
 
-		var movementX = pointer.x - scope.pointerOld.x;
-		var movementY = pointer.y - scope.pointerOld.y;
+		var movementX = this.pointer.x - scope.pointerOld.x;
+		var movementY = this.pointer.y - scope.pointerOld.y;
 
 		if ( this.state === STATE.ROTATE ) {
 
