@@ -174,6 +174,10 @@ var Viewport = function ( editor ) {
 	// otherwise controls.enabled doesn't work.
 
 	var controls = new THREE.EditorControls( camera, container.dom );
+
+	/* whummer: expose editor controls to the outside */
+	container.controls = controls;
+
 	controls.center.fromArray( editor.config.getKey( 'camera' ).target )
 	controls.addEventListener( 'change', function () {
 
