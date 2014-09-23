@@ -20,6 +20,8 @@ THREE.EditorControls = function ( object, domElement ) {
 	var vector = new THREE.Vector3();
 
 	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2 };
+	/* whummer: allow access to STATE from the outside */
+	this.STATE = STATE;
 	/* whummer: allow access to controls state from the outside
 		(all occurrences of "state" replaced with 
 		"this.state" in this file)
