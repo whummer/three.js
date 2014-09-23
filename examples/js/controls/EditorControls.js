@@ -30,7 +30,11 @@ THREE.EditorControls = function ( object, domElement ) {
 	var center = this.center;
 	var normalMatrix = new THREE.Matrix3();
 	var pointer = new THREE.Vector2();
-	var pointerOld = new THREE.Vector2();
+	/* whummer: allow access to pointerOld from the outside
+		(all occurrences of "state" replaced with 
+		"this.state" in this file)
+	*/
+	this.pointerOld = new THREE.Vector2();
 
 	// events
 
@@ -137,7 +141,7 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		}
 
-		pointerOld.set( event.clientX, event.clientY );
+		scope.pointerOld.set( event.clientX, event.clientY );
 
 		domElement.addEventListener( 'mousemove', onMouseMove, false );
 		domElement.addEventListener( 'mouseup', onMouseUp, false );
@@ -146,7 +150,11 @@ THREE.EditorControls = function ( object, domElement ) {
 
 	}
 
+	/* allow access to onMouseMove handler from outside */
 	function onMouseMove( event ) {
+		scope.onMouseMove(event);
+	}
+	this.onMouseMove = function( event ) {
 
 		if ( scope.enabled === false ) return;
 
@@ -154,8 +162,8 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		pointer.set( event.clientX, event.clientY );
 
-		var movementX = pointer.x - pointerOld.x;
-		var movementY = pointer.y - pointerOld.y;
+		var movementX = pointer.x - scope.pointerOld.x;
+		var movementY = pointer.y - scope.pointerOld.y;
 
 		if ( this.state === STATE.ROTATE ) {
 
@@ -171,11 +179,15 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		}
 
-		pointerOld.set( event.clientX, event.clientY );
+		scope.pointerOld.set( event.clientX, event.clientY );
 
 	}
 
+	/* allow access to onMouseUp handler from outside */
 	function onMouseUp( event ) {
+		scope.onMouseUp(event);
+	}
+	this.onMouseUp = function( event ) {
 
 		domElement.removeEventListener( 'mousemove', onMouseMove, false );
 		domElement.removeEventListener( 'mouseup', onMouseUp, false );
