@@ -108,8 +108,11 @@ THREE.EditorControls = function ( object, domElement ) {
 	};
 
 	// mouse
-
+	/* allow access to mouseDown handler from outside */
 	function onMouseDown( event ) {
+		scope.onMouseDown(event);
+	}
+	this.onMouseDown = function( event ) {
 
 		if ( scope.enabled === false ) return;
 
