@@ -20,7 +20,12 @@ THREE.EditorControls = function ( object, domElement ) {
 	var vector = new THREE.Vector3();
 
 	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2 };
-	var state = STATE.NONE;
+	/* whummer: allow access to controls state from the outside
+		(all occurrences of "state" replaced with 
+		"this.state" in this file)
+	*/
+	this.state = STATE.NONE;
+	//var state = STATE.NONE;
 
 	var center = this.center;
 	var normalMatrix = new THREE.Matrix3();
@@ -120,15 +125,15 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		if ( event.button === 0 ) {
 
-			state = STATE.ROTATE;
+			this.state = STATE.ROTATE;
 
 		} else if ( event.button === 1 ) {
 
-			state = STATE.ZOOM;
+			this.state = STATE.ZOOM;
 
 		} else if ( event.button === 2 ) {
 
-			state = STATE.PAN;
+			this.state = STATE.PAN;
 
 		}
 
@@ -152,15 +157,15 @@ THREE.EditorControls = function ( object, domElement ) {
 		var movementX = pointer.x - pointerOld.x;
 		var movementY = pointer.y - pointerOld.y;
 
-		if ( state === STATE.ROTATE ) {
+		if ( this.state === STATE.ROTATE ) {
 
 			scope.rotate( new THREE.Vector3( - movementX * 0.005, - movementY * 0.005, 0 ) );
 
-		} else if ( state === STATE.ZOOM ) {
+		} else if ( this.state === STATE.ZOOM ) {
 
 			scope.zoom( new THREE.Vector3( 0, 0, movementY ) );
 
-		} else if ( state === STATE.PAN ) {
+		} else if ( this.state === STATE.PAN ) {
 
 			scope.pan( new THREE.Vector3( - movementX, movementY, 0 ) );
 
@@ -177,7 +182,7 @@ THREE.EditorControls = function ( object, domElement ) {
 		domElement.removeEventListener( 'mouseout', onMouseUp, false );
 		domElement.removeEventListener( 'dblclick', onMouseUp, false );
 
-		state = STATE.NONE;
+		this.state = STATE.NONE;
 
 	}
 
