@@ -964,7 +964,11 @@
 
 		}
 
+		/* whummer: allow access to intersectObjects from the outside */
 		function intersectObjects( pointer, objects ) {
+			return scope.intersectObjects(pointer, objects);
+		}
+		this.intersectObjects = function( pointer, objects ) {
 
 			var rect = domElement.getBoundingClientRect();
 			var x = (pointer.clientX - rect.left) / rect.width;
