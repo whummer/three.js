@@ -76,8 +76,11 @@ var Viewport = function ( editor ) {
 	var projector = new THREE.Projector();
 
 	// events
-
+	/* whummer: expose getIntersects to the outside */
 	var getIntersects = function ( event, object ) {
+		return container.getIntersects(event, object);
+	}
+	container.getIntersects = function ( event, object ) {
 
 		var rect = container.dom.getBoundingClientRect();
 		x = ( event.clientX - rect.left ) / rect.width;
