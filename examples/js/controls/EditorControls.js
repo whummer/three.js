@@ -135,15 +135,21 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		if ( event.button === 0 ) {
 
-			this.state = STATE.ROTATE;
+			//whu
+			scope.state = STATE.ROTATE;
+			//this.state = STATE.ROTATE;
 
 		} else if ( event.button === 1 ) {
 
-			this.state = STATE.ZOOM;
+			//whu
+			scope.state = STATE.ZOOM;
+			//this.state = STATE.ZOOM;
 
 		} else if ( event.button === 2 ) {
 
-			this.state = STATE.PAN;
+			//whu
+			scope.state = STATE.PAN;
+			//this.state = STATE.PAN;
 
 		}
 
@@ -166,20 +172,31 @@ THREE.EditorControls = function ( object, domElement ) {
 
 		event.preventDefault();
 
-		this.pointer.set( event.clientX, event.clientY );
+		//whu
+		scope.pointer.set( event.clientX, event.clientY );
+		//this.pointer.set( event.clientX, event.clientY );
 
-		var movementX = this.pointer.x - scope.pointerOld.x;
-		var movementY = this.pointer.y - scope.pointerOld.y;
+		//whu
+		var movementX = scope.pointer.x - scope.pointerOld.x;
+                var movementY = scope.pointer.y - scope.pointerOld.y;
+		//var movementX = this.pointer.x - scope.pointerOld.x;
+		//var movementY = this.pointer.y - scope.pointerOld.y;
 
-		if ( this.state === STATE.ROTATE ) {
+		//whu
+		if ( scope.state === STATE.ROTATE ) {
+		//if ( this.state === STATE.ROTATE ) {
 
 			scope.rotate( new THREE.Vector3( - movementX * 0.005, - movementY * 0.005, 0 ) );
 
-		} else if ( this.state === STATE.ZOOM ) {
+		//whu
+		} else if ( scope.state === STATE.ZOOM ) {
+		//} else if ( this.state === STATE.ZOOM ) {
 
 			scope.zoom( new THREE.Vector3( 0, 0, movementY ) );
 
-		} else if ( this.state === STATE.PAN ) {
+		//whu
+		} else if ( scope.state === STATE.PAN ) {
+		//} else if ( this.state === STATE.PAN ) {
 
 			scope.pan( new THREE.Vector3( - movementX, movementY, 0 ) );
 
@@ -200,11 +217,17 @@ THREE.EditorControls = function ( object, domElement ) {
 		domElement.removeEventListener( 'mouseout', onMouseUp, false );
 		domElement.removeEventListener( 'dblclick', onMouseUp, false );
 
-		this.state = STATE.NONE;
+		//whu
+		scope.state = STATE.NONE;
+		//this.state = STATE.NONE;
 
 	}
 
+	/* whu: allow access to onMouseUp handler from outside */
 	function onMouseWheel( event ) {
+		scope.onMouseWheel(event);
+	}
+	this.onMouseWheel = function( event ) {
 
 		// if ( scope.enabled === false ) return;
 
