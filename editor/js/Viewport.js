@@ -255,7 +255,11 @@ var Viewport = function ( editor ) {
 
 	var saveTimeout;
 
-	signals.cameraChanged.add( function () {
+	signals.cameraChanged.add( function (cam) {
+		/* whu add ref to cam */
+ 		if(cam) {
+ 			camera = cam;
+ 		}
 
 		if ( saveTimeout !== undefined ) {
 
